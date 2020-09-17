@@ -3,14 +3,10 @@
     display:flex;
     width:100vw;
     height:100vh;
-    border:1px solid red;
+
 flex-direction:column;
 }
 #canvas{
-
 flex-grow: 1;
+}
 
-}
-document{
-    background:red
-}

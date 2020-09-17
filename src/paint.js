@@ -30,6 +30,9 @@ export default function (container, ctx) {
             drawLine(ctx, last[0], last[1], x, y, top);
             last = [x, y]
         }
+        container.ontouchend = function () {
+            db.pushPaint(container)
+        }
     } else {
         container.onmousedown = function (e) {
             painting = true;
