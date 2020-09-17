@@ -20,3 +20,12 @@ backBtn.onclick = () => {
 redoBtn.onclick = () => {
     db.redo(ctx)
 }
+saveBtn.onclick = () => {
+    const dataUrl = canvas.toDataURL("image/png");
+    const a = document.createElement('a')
+    const img = new Image()
+    img.src = dataUrl;
+    a.download = 'canvas.png'
+    a.href = dataUrl;
+    a.click()
+}
