@@ -40,14 +40,27 @@ class DB {
         a.href = dataUrl;
         a.click()
     }
+    selectedOpt(selectElement) {
+        let index = selectElement.selectedIndex
+        return selectElement.options[index].value
+    }
+    selectColor(selectElement, ctx) {
+        let color = this.selectedOpt(selectElement)
+        ctx.fillStyle = color
+        ctx.strokeStyle = color
+    }
+    selectSize(selectElement, ctx) {
+        let size = this.selectedOpt(selectElement)
+        ctx.lineWidth = size
+    }
     drawLine(ctx, x1, y1, x2, y2, top) {
         ctx.beginPath();
         ctx.moveTo(x1, y1 - top);
         ctx.lineTo(x2, y2 - top);
         ctx.stroke();
     }
-    paint(container, ctx) {
-        const top = container.getBoundingClientRect().top
+    paint(container, ctx, top) {
+
         const isTouchDevice = 'ontouchstart' in document.documentElement;
         let { painting, last, drawLine, pushPaint } = this
         let _this = this
@@ -85,7 +98,7 @@ class DB {
                     last = [e.clientX, e.clientY]
                 }
             }
-            container.onmouseup = function () {
+            document.onmouseup = function () {
                 painting = false;
                 pushPaint.call(_this, container)
             }
