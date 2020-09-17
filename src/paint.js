@@ -1,3 +1,4 @@
+import db from '../db/database.js'
 function drawLine(ctx, x1, y1, x2, y2, top) {//画线
     ctx.beginPath();
     ctx.moveTo(x1, y1 - top);
@@ -44,8 +45,9 @@ export default function (container, ctx) {
                 last = [e.clientX, e.clientY]
             }
         }
-        document.onmouseup = function () {
+        container.onmouseup = function () {
             painting = false;
+            db.pushPaint(container)
         }
     }
 }
