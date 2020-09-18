@@ -1,3 +1,4 @@
+console.log(1)
 import api from '../db/api.js'
 const saveBtn = document.getElementById('save')
 const redoBtn = document.getElementById('redo')
@@ -6,6 +7,7 @@ const clearBtn = document.getElementById('clear')
 const colorSelect = document.getElementById('selectColor')
 const sizeSelect = document.getElementById('selectSize')
 const canvas = document.getElementById('canvas');
+
 canvas.width = canvas.getBoundingClientRect().width;
 canvas.height = canvas.getBoundingClientRect().height;
 const top = canvas.getBoundingClientRect().top
@@ -33,3 +35,5 @@ saveBtn.onclick = () => {
 clearBtn.onclick = () => {
     api.clear(ctx)
 }
+
+document.addEventListener("touchmove", function (e) { e.preventDefault() }, { passive: false });

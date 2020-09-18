@@ -9,6 +9,7 @@ class DB {
         if (this.step < this.paintArray.length) { this.step = this.paintArray.length }
         this.step += 1
         this.paintArray.push(container.toDataURL())
+        console.log(this.paintArray)
     }
     clear(ctx) {
         ctx.clearRect(0, 0, document.documentElement.clientWidth, document.documentElement.clientHeight)
@@ -93,12 +94,12 @@ class DB {
                 if (painting === true) {
                     // ctx.beginPath();
                     // ctx.arc(e.clientX, e.clientY, 10, 0, 2 * Math.PI);
-                    // ctx.fill();
+                    // ctx.fill(); 
                     drawLine(ctx, last[0], last[1], e.clientX, e.clientY, top)
                     last = [e.clientX, e.clientY]
                 }
             }
-            document.onmouseup = function () {
+            container.onmouseup = function () {
                 painting = false;
                 pushPaint.call(_this, container)
             }

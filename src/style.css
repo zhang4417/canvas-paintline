@@ -3,8 +3,7 @@
     display:flex;
     width:100vw;
     height:100vh;
-
-flex-direction:column;
+    flex-direction:column;
 }
 #canvas{
 flex-grow: 1;
