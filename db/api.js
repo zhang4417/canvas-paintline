@@ -99,10 +99,19 @@ class DB {
                     last = [e.clientX, e.clientY]
                 }
             }
-            container.onmouseup = function () {
+            document.onmouseup = function () {
                 painting = false;
                 pushPaint.call(_this, container)
             }
+        }
+    }
+    stopPro(el, event) {
+        if (el instanceof Array) {
+            for (let i of el) {
+                i.addEventListener(event, (e) => { e.stopPropagation() })
+            }
+        } else {
+            el.addEventListener(event, (e) => { e.stopPropagation() })
         }
     }
 }

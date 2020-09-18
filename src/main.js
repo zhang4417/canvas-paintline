@@ -35,5 +35,6 @@ saveBtn.onclick = () => {
 clearBtn.onclick = () => {
     api.clear(ctx)
 }
-
+const elementArray = [saveBtn, clearBtn, backBtn, redoBtn, colorSelect, sizeSelect]
+api.stopPro(elementArray, 'mouseup')
 document.addEventListener("touchmove", function (e) { e.preventDefault() }, { passive: false });
