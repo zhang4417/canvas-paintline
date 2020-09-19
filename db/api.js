@@ -2,7 +2,7 @@ class DB {
     constructor() {
         this.painting = false
         this.rect = false
-        this.last = null
+        this.start = null
         this.step = 0
         this.paintArray = []
         this.isLine = true
@@ -65,13 +65,14 @@ class DB {
     }
     paint(container, ctx, top) {
         const isTouchDevice = 'ontouchstart' in document.documentElement;
-        let { painting, last, drawLine, pushPaint, isLine, isRect, isArc } = this
+        let { painting, start: start, drawLine, pushPaint, isLine, isRect, isArc } = this
         let _this = this
         if (isTouchDevice) {//判断是否为触屏
+            let last = []
             container.ontouchstart = function (e) {
                 let x = e.touches[0].clientX;
                 let y = e.touches[0].clientY;
-                last = [x, y]
+                start = [x, y]
             }
             container.ontouchmove = function (e) {
                 // let x = e.touches[0].clientX;
@@ -81,15 +82,29 @@ class DB {
                 // ctx.fill();
                 let x = e.touches[0].clientX;
                 let y = e.touches[0].clientY;
-                drawLine(ctx, last[0], last[1], x, y, top);
                 last = [x, y]
+                if (isLine) {
+                    drawLine(ctx, start[0], start[1], x, y, top);
+                    start = [x, y]
+                }
+
             }
-            container.ontouchend = function () {
+            container.ontouchend = function (e) {
+                // let x = e.touches[0].clientX;
+                // let y = e.touches[0].clientY;
+                if (isLine) { }
+                if (isRect) {
+                    _this.drawRect(ctx, start[0], start[1], last[0], last[1], top)
+                }
+                if (isArc) {
+                    let dep = Math.sqrt(Math.pow((last[0] - start[0]), 2) + Math.pow((last[1] - start[1]), 2));
+                    _this.drawArc(ctx, start[0], start[1], dep, top)
+                }
                 pushPaint.call(_this, container)
             }
         } else {
             container.onmousedown = function (e) {
-                last = [e.clientX, e.clientY]
+                start = [e.clientX, e.clientY]
                 if (isLine) {
                     painting = true;
                 }
@@ -102,8 +117,8 @@ class DB {
                         // ctx.beginPath();
                         // ctx.arc(e.clientX, e.clientY, 10, 0, 2 * Math.PI);
                         // ctx.fill(); 
-                        drawLine(ctx, last[0], last[1], e.clientX, e.clientY, top)
-                        last = [e.clientX, e.clientY]
+                        drawLine(ctx, start[0], start[1], e.clientX, e.clientY, top)
+                        start = [e.clientX, e.clientY]
                     }
                 }
                 if (isRect) {
@@ -117,12 +132,11 @@ class DB {
                     painting = false;
                 }
                 if (isRect) {
-                    _this.drawRect(ctx, last[0], last[1], x, y, top)
+                    _this.drawRect(ctx, start[0], start[1], x, y, top)
                 }
                 if (isArc) {
-                    let dep = Math.sqrt(Math.pow((x - last[0]), 2) + Math.pow((y - last[1]), 2));
-                    _this.drawArc(ctx, last[0], last[1], dep, top)
-                    console.log('aa')
+                    let dep = Math.sqrt(Math.pow((x - start[0]), 2) + Math.pow((y - start[1]), 2));
+                    _this.drawArc(ctx, start[0], start[1], dep, top)
                 }
                 pushPaint.call(_this, container)
             }
@@ -168,12 +182,14 @@ class DB {
 
     // }
     stopPro(el, event) {
-        if (el instanceof Array) {
-            for (let i of el) {
-                i.addEventListener(event, (e) => { e.stopPropagation() })
+        if ('on' + event in document.documentElement) {
+            if (el instanceof Array) {
+                for (let i of el) {
+                    i.addEventListener(event, (e) => { e.stopPropagation() })
+                }
+            } else {
+                el.addEventListener(event, (e) => { e.stopPropagation() })
             }
-        } else {
-            el.addEventListener(event, (e) => { e.stopPropagation() })
         }
     }
 }
