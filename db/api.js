@@ -5,7 +5,9 @@ class DB {
         this.last = null
         this.step = 0
         this.paintArray = []
-        this.start = []
+        this.isLine = true
+        this.isRect = false
+        this.Arc = false
     }
     pushPaint(container) {
         if (this.step < this.paintArray.length) { this.step = this.paintArray.length }
@@ -63,7 +65,7 @@ class DB {
     }
     paint(container, ctx, top) {
         const isTouchDevice = 'ontouchstart' in document.documentElement;
-        let { painting, last, drawLine, pushPaint } = this
+        let { painting, last, drawLine, pushPaint, isLine, isRect, isArc } = this
         let _this = this
         if (isTouchDevice) {//判断是否为触屏
             container.ontouchstart = function (e) {
@@ -87,45 +89,84 @@ class DB {
             }
         } else {
             container.onmousedown = function (e) {
-                painting = true;
                 last = [e.clientX, e.clientY]
+                if (isLine) {
+                    painting = true;
+                }
+                if (isRect) { }
+                if (isArc) { }
             }
             document.onmousemove = function (e) {
-                if (painting === true) {
-                    // ctx.beginPath();
-                    // ctx.arc(e.clientX, e.clientY, 10, 0, 2 * Math.PI);
-                    // ctx.fill(); 
-                    drawLine(ctx, last[0], last[1], e.clientX, e.clientY, top)
-                    last = [e.clientX, e.clientY]
+                if (isLine) {
+                    if (painting === true) {
+                        // ctx.beginPath();
+                        // ctx.arc(e.clientX, e.clientY, 10, 0, 2 * Math.PI);
+                        // ctx.fill(); 
+                        drawLine(ctx, last[0], last[1], e.clientX, e.clientY, top)
+                        last = [e.clientX, e.clientY]
+                    }
                 }
-            }
-            document.onmouseup = function () {
-                painting = false;
-                pushPaint.call(_this, container)
-            }
-        }
-    }
-
-    paintRect(container, ctx, top) {
-        let _this = this
-        let { last, start, pushPaint, rect } = this
-        this.rect = !rect
-        if (this.rect === true) {
-            container.onmousedown = function (e) {
-                start = [e.clientX, e.clientY - top]
+                if (isRect) {
+                }
+                if (isArc) { }
             }
             document.onmouseup = function (e) {
-                last = [e.clientX, e.clientY - top]
-                ctx.beginPath();
-                ctx.fillRect(start[0], start[1], last[0] - start[0], last[1] - start[1]);
-                ctx.fill();
+                let x = e.clientX
+                let y = e.clientY
+                if (isLine) {
+                    painting = false;
+                }
+                if (isRect) {
+                    _this.drawRect(ctx, last[0], last[1], x, y, top)
+                }
+                if (isArc) {
+                    let dep = Math.sqrt(Math.pow((x - last[0]), 2) + Math.pow((y - last[1]), 2));
+                    _this.drawArc(ctx, last[0], last[1], dep, top)
+                    console.log('aa')
+                }
                 pushPaint.call(_this, container)
             }
-        } else {
-            this.paint(container, ctx, top)
         }
-
     }
+    drawRect(ctx, x, y, x2, y2, top) {
+        ctx.beginPath();
+        ctx.fillRect(x, y - top, x2 - x, y2 - y);
+        ctx.fill();
+    }
+    drawArc(ctx, x, y, r, top) {
+        ctx.beginPath()
+        ctx.arc(x, y - top, r, 0, 2 * Math.PI)
+        ctx.fill()
+    }
+    switchRect() {
+        this.isArc = false
+        this.isRect = !this.isRect
+        this.isLine = !this.isRect
+    }
+    switchArc() {
+        this.isRect = false
+        this.isArc = !this.isArc
+        this.isLine = !this.isArc
+    }
+    // paintRect(container, ctx, top) {
+    //     let _this = this
+    //     let { last, pushPaint, rect } = this
+    //     this.rect = !rect
+    //     if (this.rect === true) {
+    //         container.onmousedown = function (e) {
+    //             last = [e.clientX, e.clientY]
+    //         }
+    //         document.onmouseup = function (e) {
+    //             let x = e.clientX
+    //             let y = e.clientY
+    //             this.drawRect(ctx, last[0], last[1], x, y, top)
+    //             pushPaint.call(_this, container)
+    //         }
+    //     } else {
+    //         this.paint(container, ctx, top)
+    //     }
+
+    // }
     stopPro(el, event) {
         if (el instanceof Array) {
             for (let i of el) {
