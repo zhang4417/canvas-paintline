@@ -8,6 +8,7 @@ const colorSelect = document.getElementById('selectColor')
 const sizeSelect = document.getElementById('selectSize')
 const rectBtn = document.getElementById('rect')
 const arcBtn = document.querySelector('#arc')
+const strokeBtn = document.querySelector('#stroke')
 const canvas = document.getElementById('canvas');
 
 canvas.width = canvas.getBoundingClientRect().width;
@@ -45,6 +46,15 @@ arcBtn.onclick = () => {
     api.switchArc()
     api.paint(canvas, ctx, top)
 }
-const elementArray = [saveBtn, clearBtn, backBtn, redoBtn, colorSelect, sizeSelect, rectBtn, arcBtn]
+strokeBtn.onclick = () => {
+    let fillOrStroke = api.stroke()
+    if (fillOrStroke === false) {
+        strokeBtn.textContent = 'stroke'
+    } else {
+        strokeBtn.textContent = 'fill'
+    }
+    api.paint()
+}
+const elementArray = [saveBtn, clearBtn, backBtn, redoBtn, colorSelect, sizeSelect, rectBtn, arcBtn, strokeBtn]
 api.stopPro(elementArray, 'mouseup')
 document.addEventListener("touchmove", function (e) { e.preventDefault() }, { passive: false });

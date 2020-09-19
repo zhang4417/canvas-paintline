@@ -8,6 +8,7 @@ class DB {
         this.isLine = true
         this.isRect = false
         this.Arc = false
+        this.isStroke = false
     }
     pushPaint(container) {
         if (this.step < this.paintArray.length) { this.step = this.paintArray.length }
@@ -75,11 +76,6 @@ class DB {
                 start = [x, y]
             }
             container.ontouchmove = function (e) {
-                // let x = e.touches[0].clientX;
-                // let y = e.touches[0].clientY;
-                // ctx.beginPath();
-                // ctx.arc(x, y, 10, 0, 2 * Math.PI);
-                // ctx.fill();
                 let x = e.touches[0].clientX;
                 let y = e.touches[0].clientY;
                 last = [x, y]
@@ -90,8 +86,6 @@ class DB {
 
             }
             container.ontouchend = function (e) {
-                // let x = e.touches[0].clientX;
-                // let y = e.touches[0].clientY;
                 if (isLine) { }
                 if (isRect) {
                     _this.drawRect(ctx, start[0], start[1], last[0], last[1], top)
@@ -114,9 +108,6 @@ class DB {
             document.onmousemove = function (e) {
                 if (isLine) {
                     if (painting === true) {
-                        // ctx.beginPath();
-                        // ctx.arc(e.clientX, e.clientY, 10, 0, 2 * Math.PI);
-                        // ctx.fill(); 
                         drawLine(ctx, start[0], start[1], e.clientX, e.clientY, top)
                         start = [e.clientX, e.clientY]
                     }
@@ -144,13 +135,20 @@ class DB {
     }
     drawRect(ctx, x, y, x2, y2, top) {
         ctx.beginPath();
-        ctx.fillRect(x, y - top, x2 - x, y2 - y);
-        ctx.fill();
+        if (this.isStroke) {
+            ctx.strokeRect(x, y - top, x2 - x, y2 - y)
+        } else {
+            ctx.fillRect(x, y - top, x2 - x, y2 - y);
+        }
     }
     drawArc(ctx, x, y, r, top) {
         ctx.beginPath()
         ctx.arc(x, y - top, r, 0, 2 * Math.PI)
-        ctx.fill()
+        if (this.isStroke) {
+            ctx.stroke()
+        } else {
+            ctx.fill();
+        }
     }
     switchRect() {
         this.isArc = false
@@ -161,6 +159,9 @@ class DB {
         this.isRect = false
         this.isArc = !this.isArc
         this.isLine = !this.isArc
+    }
+    stroke() {
+        return this.isStroke = !this.isStroke
     }
     // paintRect(container, ctx, top) {
     //     let _this = this
