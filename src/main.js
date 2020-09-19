@@ -6,6 +6,7 @@ const backBtn = document.getElementById('back')
 const clearBtn = document.getElementById('clear')
 const colorSelect = document.getElementById('selectColor')
 const sizeSelect = document.getElementById('selectSize')
+const rectBtn = document.getElementById('rect')
 const canvas = document.getElementById('canvas');
 
 canvas.width = canvas.getBoundingClientRect().width;
@@ -35,6 +36,9 @@ saveBtn.onclick = () => {
 clearBtn.onclick = () => {
     api.clear(ctx)
 }
-const elementArray = [saveBtn, clearBtn, backBtn, redoBtn, colorSelect, sizeSelect]
+rectBtn.onclick = () => {
+    api.paintRect(canvas, ctx, top)
+}
+const elementArray = [saveBtn, clearBtn, backBtn, redoBtn, colorSelect, sizeSelect, rectBtn]
 api.stopPro(elementArray, 'mouseup')
 document.addEventListener("touchmove", function (e) { e.preventDefault() }, { passive: false });

@@ -1,15 +1,16 @@
 class DB {
     constructor() {
         this.painting = false
+        this.rect = false
         this.last = null
         this.step = 0
         this.paintArray = []
+        this.start = []
     }
     pushPaint(container) {
         if (this.step < this.paintArray.length) { this.step = this.paintArray.length }
         this.step += 1
         this.paintArray.push(container.toDataURL())
-        console.log(this.paintArray)
     }
     clear(ctx) {
         ctx.clearRect(0, 0, document.documentElement.clientWidth, document.documentElement.clientHeight)
@@ -61,7 +62,6 @@ class DB {
         ctx.stroke();
     }
     paint(container, ctx, top) {
-
         const isTouchDevice = 'ontouchstart' in document.documentElement;
         let { painting, last, drawLine, pushPaint } = this
         let _this = this
@@ -104,6 +104,27 @@ class DB {
                 pushPaint.call(_this, container)
             }
         }
+    }
+
+    paintRect(container, ctx, top) {
+        let _this = this
+        let { last, start, pushPaint, rect } = this
+        this.rect = !rect
+        if (this.rect === true) {
+            container.onmousedown = function (e) {
+                start = [e.clientX, e.clientY - top]
+            }
+            document.onmouseup = function (e) {
+                last = [e.clientX, e.clientY - top]
+                ctx.beginPath();
+                ctx.fillRect(start[0], start[1], last[0] - start[0], last[1] - start[1]);
+                ctx.fill();
+                pushPaint.call(_this, container)
+            }
+        } else {
+            this.paint(container, ctx, top)
+        }
+
     }
     stopPro(el, event) {
         if (el instanceof Array) {
