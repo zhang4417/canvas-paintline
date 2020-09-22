@@ -47,7 +47,14 @@ class DB {
     }
     selectedOpt(selectElement) {
         let index = selectElement.selectedIndex
-        return selectElement.options[index].value
+        let value = selectElement.options[index].value
+        return value
+    }
+    x(selectElement) {
+        let arr = selectElement.options
+        for (let i of arr) {
+            i.style.color = i.value
+        }
     }
     selectColor(selectElement, ctx) {
         let color = this.selectedOpt(selectElement)

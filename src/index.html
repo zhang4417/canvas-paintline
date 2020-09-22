@@ -12,29 +12,58 @@
 <body>
     <div class="wrapper">
         <nav id="nav">
-            <button id="save">save</button>
-            <button id="clear">Clear</button>
-            <select id="selectColor">
+            <div id="save" class="icon-wrapper">
+                <svg class="icon">
+                    <use xlink:href="#icon-save"></use>
+                </svg>
+            </div>
+            <div id="clear" class="icon-wrapper">
+                <svg class="icon">
+                    <use xlink:href="#icon-clear"></use>
+                </svg>
+            </div>
+            <div id="back" class="icon-wrapper">
+                <svg class="icon">
+                    <use xlink:href="#icon-back"></use>
+                </svg>
+            </div>
+            <div id="redo" class="icon-wrapper">
+                <svg class="icon">
+                    <use xlink:href="#icon-redo"></use>
+                </svg>
+            </div>
+            <div id="rect" class="icon-wrapper">
+                <svg class="icon">
+                    <use xlink:href="#icon-rect"></use>
+                </svg>
+            </div>
+            <div id="arc" class="icon-wrapper">
+                <svg class="icon">
+                    <use xlink:href="#icon-arc"></use>
+                </svg>
+            </div>
+            <div id="line" class="icon-wrapper">
+                <svg class="icon">
+                    <use xlink:href="#icon-line"></use>
+                </svg>
+            </div>
+            <select id="selectColor" class="icon-wrapper">
                 <option value="black">black</option>
                 <option value="red" selected>red</option>
                 <option value="green">green</option>
             </select>
-            <select id="selectSize">
+            <select id="selectSize" class="icon-wrapper">
                 <option value="3">3</option>
                 <option value="4" selected>4</option>
                 <option value="5">5</option>
             </select>
-
-            <button id="back">back</button>
-            <button id="redo">redo</button>
-            <button id="rect">rect/line</button>
-            <button id="arc">arc/line</button>
-            <button id="stroke">stroke</button>
+            <div id="stroke" class="icon-wrapper">stroke</div>
         </nav>
         <canvas id="canvas"></canvas>
     </div>
 
     <script type="module" src="./main.js"></script>
+    <script src="//at.alicdn.com/t/font_2080760_116wip9e5dx.js"></script>
 
 </body>
 

@@ -8,4 +8,30 @@
 #canvas{
 flex-grow: 1;
 }
+.icon {
+       width: 2em; height: 2em;
+       vertical-align: -0.2em;
+       fill: currentColor;
+       overflow: hidden;
+    }
+#nav{
+    background:rgba(238,238,238,1);
+    box-shadow: 0px 3px 8px rgb(237,237,237);
+    display:inline-flex;
+    justify-content:center;
+}
+.icon-wrapper{
+    margin:auto 5px;
 
+
+}
+#selectSize,#selectColor,#stroke{
+    height:2em;
+    text-align:center;
+    line-height: 2em;
+}
+select{
+    border:1px dashed grey; 
+    outline:none;
+    background: inherit;
+}

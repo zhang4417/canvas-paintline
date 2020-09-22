@@ -58,3 +58,5 @@ strokeBtn.onclick = () => {
 const elementArray = [saveBtn, clearBtn, backBtn, redoBtn, colorSelect, sizeSelect, rectBtn, arcBtn, strokeBtn]
 api.stopPro(elementArray, 'mouseup')
 document.addEventListener("touchmove", function (e) { e.preventDefault() }, { passive: false });
+
+api.x(colorSelect)
