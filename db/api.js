@@ -158,13 +158,18 @@ class DB {
     }
     switchRect() {
         this.isArc = false
-        this.isRect = !this.isRect
-        this.isLine = !this.isRect
+        this.isRect = true
+        this.isLine = false
     }
     switchArc() {
         this.isRect = false
-        this.isArc = !this.isArc
-        this.isLine = !this.isArc
+        this.isArc = true
+        this.isLine = false
+    }
+    switchLine() {
+        this.isLine = true
+        this.isArc = false
+        this.isRect = false
     }
     stroke() {
         return this.isStroke = !this.isStroke

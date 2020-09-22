@@ -4,10 +4,10 @@ const saveBtn = document.getElementById('save')
 const redoBtn = document.getElementById('redo')
 const backBtn = document.getElementById('back')
 const clearBtn = document.getElementById('clear')
-const colorSelect = document.getElementById('selectColor')
 const sizeSelect = document.getElementById('selectSize')
 const rectBtn = document.getElementById('rect')
 const arcBtn = document.querySelector('#arc')
+const lineBtn = document.querySelector('#line')
 const strokeBtn = document.querySelector('#stroke')
 const colorInput = document.querySelector('#pickColor')
 const canvas = document.getElementById('canvas');
@@ -44,6 +44,10 @@ arcBtn.onclick = () => {
     api.switchArc()
     api.paint(canvas, ctx, top)
 }
+lineBtn.onclick = () => {
+    api.switchLine()
+    api.paint(canvas, ctx, top)
+}
 strokeBtn.onclick = () => {
     let fillOrStroke = api.stroke()
     if (fillOrStroke === false) {
@@ -53,7 +57,7 @@ strokeBtn.onclick = () => {
     }
     api.paint()
 }
-const elementArray = [saveBtn, clearBtn, backBtn, redoBtn, colorInput, sizeSelect, rectBtn, arcBtn, strokeBtn]
+const elementArray = [saveBtn, clearBtn, backBtn, redoBtn, colorInput, sizeSelect, rectBtn, arcBtn, lineBtn, strokeBtn]
 api.stopPro(elementArray, 'mouseup')
 document.addEventListener("touchmove", function (e) { e.preventDefault() }, { passive: false });
 
