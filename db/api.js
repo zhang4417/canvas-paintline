@@ -82,6 +82,7 @@ class DB {
                 start = [x, y]
             }
             container.ontouchmove = function (e) {
+                painting = true
                 let x = e.touches[0].clientX;
                 let y = e.touches[0].clientY;
                 last = [x, y]
@@ -93,14 +94,16 @@ class DB {
             }
             container.ontouchend = function (e) {
                 if (isLine) { }
-                if (isRect) {
+                if (start && painting && isRect) {
                     _this.drawRect(ctx, start[0], start[1], last[0], last[1], top)
                 }
-                if (isArc) {
+                if (start && painting && isArc) {
                     let dep = Math.sqrt(Math.pow((last[0] - start[0]), 2) + Math.pow((last[1] - start[1]), 2));
                     _this.drawArc(ctx, start[0], start[1], dep, top)
                 }
                 pushPaint.call(_this, container)
+                painting = false
+                start = null
             }
         } else {
             container.onmousedown = function (e) {
@@ -120,6 +123,7 @@ class DB {
                 }
                 if (isRect) { }
                 if (isArc) { }
+
             }
             document.onmouseup = function (e) {
                 let x = e.clientX
