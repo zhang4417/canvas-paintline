@@ -22,8 +22,6 @@ flex-grow: 1;
 }
 .icon-wrapper{
     margin:auto 5px;
-
-
 }
 #selectSize,#selectColor,#stroke{
     height:2em;
@@ -33,5 +31,11 @@ flex-grow: 1;
 select{
     border:1px dashed grey; 
     outline:none;
+    background: inherit;
+}
+input{
+    outline:none;
+    height:2em;
+    border:1px dashed grey;
     background: inherit;
 }

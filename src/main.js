@@ -59,4 +59,11 @@ const elementArray = [saveBtn, clearBtn, backBtn, redoBtn, colorSelect, sizeSele
 api.stopPro(elementArray, 'mouseup')
 document.addEventListener("touchmove", function (e) { e.preventDefault() }, { passive: false });
 
-api.x(colorSelect)
+const y = document.querySelector('#y')
+const myPicker = new JSColor('#y')
+myPicker.option({
+    crossSize: 5
+})
+myPicker.onChange = () => { console.log(myPicker.toRGBAString()) }
+
+
