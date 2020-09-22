@@ -8,7 +8,7 @@ class DB {
         this.isLine = true
         this.isRect = false
         this.Arc = false
-        this.isStroke = false
+        this.isStroke = true
     }
     pushPaint(container) {
         if (this.step < this.paintArray.length) { this.step = this.paintArray.length }
@@ -118,8 +118,7 @@ class DB {
                         start = [e.clientX, e.clientY]
                     }
                 }
-                if (isRect) {
-                }
+                if (isRect) { }
                 if (isArc) { }
             }
             document.onmouseup = function (e) {

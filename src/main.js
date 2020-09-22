@@ -51,11 +51,11 @@ lineBtn.onclick = () => {
 strokeBtn.onclick = () => {
     let fillOrStroke = api.stroke()
     if (fillOrStroke === false) {
-        strokeBtn.textContent = 'stroke'
+        strokeBtn.textContent = 'shape'
     } else {
-        strokeBtn.textContent = 'fill'
+        strokeBtn.textContent = 'solid'
     }
-    api.paint()
+    api.paint(canvas, ctx, top)
 }
 const elementArray = [saveBtn, clearBtn, backBtn, redoBtn, colorInput, sizeSelect, rectBtn, arcBtn, lineBtn, strokeBtn]
 api.stopPro(elementArray, 'mouseup')
