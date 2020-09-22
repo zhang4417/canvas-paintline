@@ -127,14 +127,15 @@ class DB {
                 if (isLine) {
                     painting = false;
                 }
-                if (isRect) {
+                if (start && isRect) {
                     _this.drawRect(ctx, start[0], start[1], x, y, top)
                 }
-                if (isArc) {
+                if (start && isArc) {
                     let dep = Math.sqrt(Math.pow((x - start[0]), 2) + Math.pow((y - start[1]), 2));
                     _this.drawArc(ctx, start[0], start[1], dep, top)
                 }
                 pushPaint.call(_this, container)
+                start = null
             }
         }
     }

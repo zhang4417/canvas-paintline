@@ -21,12 +21,13 @@ flex-grow: 1;
     justify-content:center;
 }
 .icon-wrapper{
-    margin:auto 5px;
+    margin:5px 5px;
 }
-#selectSize,#selectColor,#stroke{
+#selectSize,#stroke{
     height:2em;
     text-align:center;
     line-height: 2em;
+    vertical-align:middle
 }
 select{
     border:1px dashed grey; 
