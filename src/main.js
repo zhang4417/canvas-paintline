@@ -9,20 +9,18 @@ const sizeSelect = document.getElementById('selectSize')
 const rectBtn = document.getElementById('rect')
 const arcBtn = document.querySelector('#arc')
 const strokeBtn = document.querySelector('#stroke')
+const colorInput = document.querySelector('#pickColor')
 const canvas = document.getElementById('canvas');
 
 canvas.width = canvas.getBoundingClientRect().width;
 canvas.height = canvas.getBoundingClientRect().height;
 const top = canvas.getBoundingClientRect().top
 const ctx = canvas.getContext('2d');
-ctx.fillStyle = api.selectedOpt(colorSelect)
-ctx.strokeStyle = api.selectedOpt(colorSelect)
 ctx.lineWidth = api.selectedOpt(sizeSelect)
 ctx.lineCap = "round"
+api.pickColor(colorInput, ctx)
 api.paint(canvas, ctx, top)
-colorSelect.onchange = () => {
-    api.selectColor(colorSelect, ctx)
-}
+
 sizeSelect.onchange = () => {
     api.selectSize(sizeSelect, ctx)
 }
@@ -55,15 +53,11 @@ strokeBtn.onclick = () => {
     }
     api.paint()
 }
-const elementArray = [saveBtn, clearBtn, backBtn, redoBtn, colorSelect, sizeSelect, rectBtn, arcBtn, strokeBtn]
+const elementArray = [saveBtn, clearBtn, backBtn, redoBtn, colorInput, sizeSelect, rectBtn, arcBtn, strokeBtn]
 api.stopPro(elementArray, 'mouseup')
 document.addEventListener("touchmove", function (e) { e.preventDefault() }, { passive: false });
 
-const y = document.querySelector('#y')
-const myPicker = new JSColor('#y')
-myPicker.option({
-    crossSize: 5
-})
-myPicker.onChange = () => { console.log(myPicker.toRGBAString()) }
+
+
 
 

@@ -50,20 +50,19 @@ class DB {
         let value = selectElement.options[index].value
         return value
     }
-    x(selectElement) {
-        let arr = selectElement.options
-        for (let i of arr) {
-            i.style.color = i.value
-        }
-    }
-    selectColor(selectElement, ctx) {
-        let color = this.selectedOpt(selectElement)
-        ctx.fillStyle = color
-        ctx.strokeStyle = color
-    }
     selectSize(selectElement, ctx) {
         let size = this.selectedOpt(selectElement)
         ctx.lineWidth = size
+    }
+    pickColor(container, ctx) {
+        const myPicker = new JSColor(container)
+        myPicker.option({
+            crossSize: 5
+        })
+        myPicker.onChange = () => {
+            ctx.fillStyle = myPicker.toRGBAString()
+            ctx.strokeStyle = myPicker.toRGBAString()
+        }
     }
     drawLine(ctx, x1, y1, x2, y2, top) {
         ctx.beginPath();
