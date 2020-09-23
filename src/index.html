@@ -12,48 +12,50 @@
 <body>
     <div class="wrapper">
         <nav id="nav">
-            <div id="save" class="icon-wrapper">
+            <div id="save" class="nav-child icon-wrapper">
                 <svg class="icon">
                     <use xlink:href="#icon-save"></use>
                 </svg>
             </div>
-            <div id="clear" class="icon-wrapper">
+            <div id="clear" class="nav-child icon-wrapper">
                 <svg class="icon">
                     <use xlink:href="#icon-clear"></use>
                 </svg>
             </div>
-            <div id="back" class="icon-wrapper">
+            <div id="back" class="nav-child icon-wrapper">
                 <svg class="icon">
                     <use xlink:href="#icon-back"></use>
                 </svg>
             </div>
-            <div id="redo" class="icon-wrapper">
+            <div id="redo" class="nav-child icon-wrapper">
                 <svg class="icon">
                     <use xlink:href="#icon-redo"></use>
                 </svg>
             </div>
-            <div id="rect" class="icon-wrapper">
+            <div id="rect" class="nav-child icon-wrapper">
                 <svg class="icon">
                     <use xlink:href="#icon-rect"></use>
                 </svg>
             </div>
-            <div id="arc" class="icon-wrapper">
+            <div id="arc" class="nav-child icon-wrapper">
                 <svg class="icon">
                     <use xlink:href="#icon-arc"></use>
                 </svg>
             </div>
-            <div id="line" class="icon-wrapper">
+            <div id="line" class="icon-wrapper nav-child">
                 <svg class="icon">
                     <use xlink:href="#icon-line"></use>
                 </svg>
             </div>
-            <input id="pickColor" value="rgba(0,0,0,1)" class="icon-wrapper" readonly>
-            <select id="selectSize" class="icon-wrapper">
+            <input id="pickColor" value="rgba(0,0,0,1)" class="nav-child" readonly>
+            <select id="selectSize" class="nav-child">
                 <option value="3">3</option>
                 <option value="4" selected>4</option>
                 <option value="5">5</option>
             </select>
-            <button id="stroke" class="icon-wrapper">shape</button>
+            <button id="stroke" class="nav-child">
+                shape
+            </button>
         </nav>
         <canvas id="canvas"></canvas>
     </div>
