@@ -51,9 +51,9 @@ lineBtn.onclick = () => {
 strokeBtn.onclick = () => {
     let fillOrStroke = api.stroke()
     if (fillOrStroke === false) {
-        strokeBtn.textContent = 'shape'
-    } else {
         strokeBtn.textContent = 'solid'
+    } else {
+        strokeBtn.textContent = 'shape'
     }
     api.paint(canvas, ctx, top)
 }
