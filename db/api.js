@@ -59,6 +59,8 @@ class DB {
         myPicker.option({
             crossSize: 5
         })
+        ctx.fillStyle = myPicker.toRGBAString()
+        ctx.strokeStyle = myPicker.toRGBAString()
         myPicker.onChange = () => {
             ctx.fillStyle = myPicker.toRGBAString()
             ctx.strokeStyle = myPicker.toRGBAString()

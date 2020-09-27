@@ -17,7 +17,8 @@ canvas.height = canvas.getBoundingClientRect().height;
 const top = canvas.getBoundingClientRect().top
 const ctx = canvas.getContext('2d');
 ctx.lineWidth = api.selectedOpt(sizeSelect)
-ctx.lineCap = "round"
+ctx.lineCap = "butt"
+ctx.lineJoin = "round";
 api.pickColor(colorInput, ctx)
 api.paint(canvas, ctx, top)
 
